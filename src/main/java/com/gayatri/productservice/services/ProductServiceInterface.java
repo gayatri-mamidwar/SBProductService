@@ -9,5 +9,6 @@ public interface ProductServiceInterface {
 
      List<Product> getAllProducts();
      Product getSingleProduct(long id);
-     void createProduct(CreateProductDto createProductDto);
+     //changing createProduct return type from void to Product just for testing purpose
+     Product createProduct(CreateProductDto createProductDto);
 }

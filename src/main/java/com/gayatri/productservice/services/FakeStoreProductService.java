@@ -4,8 +4,10 @@ import com.gayatri.productservice.dtos.CreateProductDto;
 import com.gayatri.productservice.dtos.FakeStoreProductDto;
 import com.gayatri.productservice.models.Product;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,9 +20,23 @@ public class FakeStoreProductService implements ProductServiceInterface{
         this.restTemplate = restTemplate;
     }
 
+    // Making a GET request to the API to fetch all products
     @Override
     public List<Product> getAllProducts() {
-        return List.of();
+
+       //Getting an array of FakeStoreDto objects
+        FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject("https://fakestoreapi.com/products", FakeStoreProductDto[].class);
+
+        // Converting the DTO list to the Product list and returning it
+        List<Product> products = new ArrayList<>();
+
+        //iterate over array & convert individual fakestoreproductDTO to product
+        for(FakeStoreProductDto fakeStoreProductDto : fakeStoreProductDtos){
+            Product product = fakeStoreProductDto.toProduct();
+            products.add(product);
+        }
+
+        return products;
     }
 
     /*
@@ -32,13 +48,30 @@ public class FakeStoreProductService implements ProductServiceInterface{
      */
     @Override
     public Product getSingleProduct(long id) {
-        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/" + id, FakeStoreProductDto.class);
+        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/" + id,
+                                                                            FakeStoreProductDto.class);
         return fakeStoreProductDto.toProduct();
     }
 
+    /*
+    This is just a dummy endpoint.
+    changing createProduct return type from void to Product just for testing purpose
+     */
     @Override
-    public void createProduct(CreateProductDto createProductDto) {
+    public Product createProduct(CreateProductDto createProductDto) {
 
+        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+        fakeStoreProductDto.setTitle(createProductDto.getTitle());
+        fakeStoreProductDto.setPrice(createProductDto.getPrice());
+        fakeStoreProductDto.setCategory(createProductDto.getCategory());
+        fakeStoreProductDto.setDescription(createProductDto.getDescription());
+        fakeStoreProductDto.setImage(createProductDto.getImage());
+
+        //postForObject() takes 3 param 1st is url on which we are sending, 2nd object which we want to send, 3rd obj of which file
+        FakeStoreProductDto fakeStoreProductDto1 = restTemplate.postForObject("https://fakestoreapi.com/products",
+                                    fakeStoreProductDto,
+                                    FakeStoreProductDto.class);
+        return fakeStoreProductDto1.toProduct();
     }
 }
 

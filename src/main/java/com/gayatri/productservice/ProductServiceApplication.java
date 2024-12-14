@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ProductServiceApplication {
 
+    //main() use to launch Apache tomcat server
     public static void main(String[] args) {
-//        Product p1 = new Product();
         SpringApplication.run(ProductServiceApplication.class, args);
     }
 

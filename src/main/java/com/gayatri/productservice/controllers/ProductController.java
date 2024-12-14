@@ -3,6 +3,7 @@ package com.gayatri.productservice.controllers;
 import com.gayatri.productservice.dtos.CreateProductDto;
 import com.gayatri.productservice.models.Product;
 import com.gayatri.productservice.services.ProductServiceInterface;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,9 +51,10 @@ public class ProductController {
         .
     }
      */
+    //changing createProduct return type from void to Product just for testing purpose
     @PostMapping("/products")
-    public void createProduct(CreateProductDto createProductDto){
-        productServiceInterface.createProduct(createProductDto);
+    public Product createProduct(@RequestBody CreateProductDto createProductDto){
+        return productServiceInterface.createProduct(createProductDto);
     }
 
 }
