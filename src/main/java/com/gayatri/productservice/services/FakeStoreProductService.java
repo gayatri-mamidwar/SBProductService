@@ -4,13 +4,12 @@ import com.gayatri.productservice.dtos.CreateProductDto;
 import com.gayatri.productservice.dtos.FakeStoreProductDto;
 import com.gayatri.productservice.models.Product;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductServiceInterface{
 
     //RestTemplate is used to call 3rd party API's. restTemplate is a way to contact the internet & get the data
@@ -25,7 +24,8 @@ public class FakeStoreProductService implements ProductServiceInterface{
     public List<Product> getAllProducts() {
 
        //Getting an array of FakeStoreDto objects
-        FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject("https://fakestoreapi.com/products", FakeStoreProductDto[].class);
+        FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject("https://fakestoreapi.com/products",
+                FakeStoreProductDto[].class);
 
         // Converting the DTO list to the Product list and returning it
         List<Product> products = new ArrayList<>();
@@ -50,6 +50,7 @@ public class FakeStoreProductService implements ProductServiceInterface{
     public Product getSingleProduct(long id) {
         FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/" + id,
                                                                             FakeStoreProductDto.class);
+        System.out.println("calling.....");
         return fakeStoreProductDto.toProduct();
     }
 
@@ -61,6 +62,7 @@ public class FakeStoreProductService implements ProductServiceInterface{
     public Product createProduct(CreateProductDto createProductDto) {
 
         FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+
         fakeStoreProductDto.setTitle(createProductDto.getTitle());
         fakeStoreProductDto.setPrice(createProductDto.getPrice());
         fakeStoreProductDto.setCategory(createProductDto.getCategory());
@@ -71,7 +73,22 @@ public class FakeStoreProductService implements ProductServiceInterface{
         FakeStoreProductDto fakeStoreProductDto1 = restTemplate.postForObject("https://fakestoreapi.com/products",
                                     fakeStoreProductDto,
                                     FakeStoreProductDto.class);
+
+        System.out.println("fakestoreproductdto before return values...");
         return fakeStoreProductDto1.toProduct();
+    }
+
+    @Override
+    public Product updateProduct(CreateProductDto createProductDto, long id) {
+//        getSingleProduct(id);
+//        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+
+//        fakeStoreProductDto.setTitle(c);
+//                FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/" + id,
+//                                                                                CreateProductDto.class);
+
+//      return fakeStoreProductDto.toProduct();
+        return null;
     }
 }
 

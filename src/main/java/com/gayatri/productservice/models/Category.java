@@ -1,32 +1,26 @@
 package com.gayatri.productservice.models;
 
-public class Category {
+import java.util.List;
 
-    private long id;
+public class Category extends BaseModel{
+
     private String title;
-
-    public Category(long id, String title) {
-        this.id = id;
-        this.title = title;
-    }
-
-    public Category() {
-    }
-
-    public long getId() {
-        return this.id;
-    }
+    private List<Product> products;
 
     public String getTitle() {
-        return this.title;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
 

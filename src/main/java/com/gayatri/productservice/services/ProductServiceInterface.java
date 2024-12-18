@@ -11,4 +11,5 @@ public interface ProductServiceInterface {
      Product getSingleProduct(long id);
      //changing createProduct return type from void to Product just for testing purpose
      Product createProduct(CreateProductDto createProductDto);
+     Product updateProduct(CreateProductDto createProductDto, long id);
 }

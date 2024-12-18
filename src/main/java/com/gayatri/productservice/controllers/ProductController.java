@@ -3,7 +3,7 @@ package com.gayatri.productservice.controllers;
 import com.gayatri.productservice.dtos.CreateProductDto;
 import com.gayatri.productservice.models.Product;
 import com.gayatri.productservice.services.ProductServiceInterface;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +13,8 @@ public class ProductController {
 
     private ProductServiceInterface productServiceInterface;
 
-    public ProductController(ProductServiceInterface productServiceInterface){
+    //If u have many service classes then use @Qualifier to know compiler which service to use
+    public ProductController(@Qualifier("fakeStoreProductService") ProductServiceInterface productServiceInterface){
         this.productServiceInterface = productServiceInterface;
     }
     /*
@@ -56,5 +57,11 @@ public class ProductController {
     public Product createProduct(@RequestBody CreateProductDto createProductDto){
         return productServiceInterface.createProduct(createProductDto);
     }
+
+    //update single product details if id not present create new product
+//    @PutMapping("/products/{id}")
+//    public Product updateProduct(@RequestBody CreateProductDto createProductDto, @PathVariable("id") long id){
+//        return productServiceInterface.updateProduct(createProductDto, id);
+//    }
 
 }

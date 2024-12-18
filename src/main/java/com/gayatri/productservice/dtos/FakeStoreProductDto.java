@@ -7,11 +7,20 @@ import com.gayatri.productservice.models.Product;
 public class FakeStoreProductDto {
 
     //variable names as per FakeStore API
+    private long id;
     private String title;
     private double price;
     private String category;
     private String description;
     private String image;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return this.title;
@@ -56,6 +65,7 @@ public class FakeStoreProductDto {
     //Method to convert FakeStoreProductDto to Product. whatever values we are getting setting in product hence set() used
     public Product toProduct() {
         Product product = new Product();
+        product.setId(id);
         product.setTitle(title);
         product.setPrice(price);
 
