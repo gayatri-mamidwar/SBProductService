@@ -6,7 +6,6 @@ import com.gayatri.productservice.models.Product;
 //Dto for fetching product details
 public class FakeStoreProductDto {
 
-    //variable names as per FakeStore API
     private long id;
     private String title;
     private double price;
@@ -70,7 +69,7 @@ public class FakeStoreProductDto {
         product.setPrice(price);
 
         Category category1 = new Category();
-        category1.setTitle(category);           //in this cls, category is of String type. so creating category1 obj
+        category1.setTitle(category);           //in this cls, category is of String type.nd inside Product, category is obj type so creating category1 obj
         product.setCategory(category1);
 
         product.setDescription(description);

@@ -9,11 +9,12 @@ public class Product extends BaseModel {
     private Category category;          //bcz of cardinality we are adding Category datatype i.e.category obj. in product
     private String imageUrl;
 
-    public Product(String title, String description, double price, Category category, String imageUrl) {
+    //in o/p we are getting sequence as per return Entity/Model contructor parameters
+    public Product(String title, double price, Category category, String description, String imageUrl) {
         this.title = title;
-        this.description = description;
         this.price = price;
         this.category = category;
+        this.description = description;
         this.imageUrl = imageUrl;
     }
 
@@ -40,6 +41,7 @@ public class Product extends BaseModel {
         return this.imageUrl;
     }
 
+    //variable names should be same as per Product setter method sequence.
     public void setTitle(String title) {
         this.title = title;
     }
@@ -60,51 +62,9 @@ public class Product extends BaseModel {
         this.imageUrl = imageUrl;
     }
 
-    //To make private variables accessible to outside world. create getter & setter functions for it
-   /* public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-    */
-
-
 }
 
-/*
+/* imp-
+To make private variables accessible to outside world. create getter & setter functions for it
 @Getter, @Setter, @AllArgConstructor, @NoArgConstructor ==>> Provided by Lombok. & This are Class level constructors
  */

@@ -3,6 +3,7 @@ package com.gayatri.productservice.dtos;
 //Dto for creating product
 public class CreateProductDto {
 
+    //At the time of product creation we don't know what will be the id of product hence in createDTO id is not defined
     private String title;
     private double price;
     private String category;
